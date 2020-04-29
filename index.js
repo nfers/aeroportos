@@ -2,6 +2,7 @@
 
 const express = require('express');
 const kraken = require('kraken-js');
+const db = require('./database/connection');
 
 var options, app, port;
 
@@ -10,11 +11,11 @@ options = {
     onconfig: function (config, next) {
         next(null, config);
     }
-}
+};
 
 app = module.exports = express();
 
-app.use(kraken(options))
+app.use(kraken(options));
 
 app.on('start', function () {
     console.log('Environment: %s', app.kraken.get('env:env'));
