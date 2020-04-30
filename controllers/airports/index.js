@@ -45,13 +45,15 @@ module.exports = function (router) {
             matriz.push(eixoX);
         }
         
+
+
+
+
         for(let i = 0; i < aeroporto.qtdAeroportos; i++){
             let foiAtribuido = false;
             do{
                 const x = Math.floor(Math.random() * aeroporto.largura);
                 const y = Math.floor(Math.random() * aeroporto.altura);
-
-                console.log(x, y);
 
                 if( !matriz[y][x].isAeroporto &&  ! matriz[y][x].isNuvem){
                     matriz[y][x].isAeroporto = true;
@@ -59,6 +61,7 @@ module.exports = function (router) {
                 }
             }while(!foiAtribuido );
         }
+
 
         for(let i = 0; i < aeroporto.qtdNuvens; i++){
             let foiAtribuido = false;
@@ -73,57 +76,71 @@ module.exports = function (router) {
             }while(!foiAtribuido );
         }
 
+        //save matriz; 
+
         const simulacoes = [
             {
                 dia: 1,
-                matriz,
+                matriz: JSON.parse(JSON.stringify(matriz)),
             }
         ];
 
         let possuiAeroportoSemNuvens = true;
+
         let dia = 1;
         do{
-            possuiAeroportoSemNuvens = true;
+            dia ++;
+            
             for(const [indexEixoY, eixoY] of matriz.entries()){
                 for(const [indexEixoX, eixoX] of eixoY.entries()){
-                    if(eixoX.isNuvem){
+                    if(eixoX.isNuvem && eixoX.createAt !== dia){
 
                         //horizontal a esquerda
-                        if(matriz[indexEixoY][indexEixoX - 1]){
-                            matriz[indexEixoY][indexEixoX - 1].isNuvem = true;
+                        if(matriz[indexEixoY][indexEixoX - 1] && !matriz[indexEixoY][indexEixoX - 1].isNuvem){
+                            matriz[indexEixoY][indexEixoX - 1].isNuvem = true
+                            matriz[indexEixoY][indexEixoX - 1].createAt = dia;
                         }
 
                         //horizontal a direita
-                        if(matriz[indexEixoY][indexEixoX + 1]){
+                        if(matriz[indexEixoY][indexEixoX + 1] && !matriz[indexEixoY][indexEixoX + 1].isNuvem ){
                             matriz[indexEixoY][indexEixoX + 1].isNuvem = true;
+                            matriz[indexEixoY][indexEixoX + 1].createAt = dia;
                         }
 
                         //vertical para baixo
-                        if(matriz[indexEixoY - 1]){
+                        if(matriz[indexEixoY - 1] && !matriz[indexEixoY - 1][indexEixoX].isNuvem){
                             matriz[indexEixoY - 1][indexEixoX].isNuvem = true;
+                            matriz[indexEixoY - 1][indexEixoX].createAt = dia;
                         }
 
                         //vertical para cima
-                        if(matriz[indexEixoY + 1]){
+                        if(matriz[indexEixoY + 1] &&  !matriz[indexEixoY + 1][indexEixoX].isNuvem){
                             matriz[indexEixoY + 1][indexEixoX].isNuvem = true;
+                            matriz[indexEixoY + 1][indexEixoX].createAt = dia;
                         }
-                    }
-
-                    if(eixoX.isAeroporto && !eixoX.isNuvem){
-                        possuiAeroportoSemNuvens = false;
                     }
                 }
             }
 
-            dia ++;
-            console.log(dia);
 
             simulacoes.push({
                 dia,
-                matriz: [... matriz]
+                matriz: JSON.parse(JSON.stringify(matriz))
             })
 
-        }while(! possuiAeroportoSemNuvens );
+            possuiAeroportoSemNuvens = false;
+
+            for(const [y, eixoY] of matriz.entries()){
+                for(const [x, eixoX] of eixoY.entries()){
+                   
+                    if(eixoX.isAeroporto && !eixoX.isNuvem){
+                        console.log(matriz, eixoX, x, y, dia);
+                        possuiAeroportoSemNuvens = true;
+                    }
+                }
+            }
+
+        }while(possuiAeroportoSemNuvens );
 
 
 
