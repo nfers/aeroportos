@@ -7,6 +7,8 @@ module.exports = function (router) {
     });
 
     router.post('/api/', async function (req, res) {
+        const nuvens = await (req.params)
+        
         res.json({message: 'API - Health check ok'})
     });
 };

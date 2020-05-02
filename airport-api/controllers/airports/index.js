@@ -15,7 +15,7 @@ module.exports = function (router) {
     router.post('/', async function (req, res) {
         const airports = await Airport.create(req.body)
 
-        return res.json(airports);
+        return res.json({ success: true, data: airports});
     });
 
     router.delete('/:id', async function (req, res) {
