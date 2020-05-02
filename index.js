@@ -3,6 +3,7 @@
 const express = require('express');
 const kraken = require('kraken-js');
 const db = require('./database/connection');
+const cors = require('cors');
 
 var options, app, port;
 
@@ -14,6 +15,8 @@ options = {
 };
 
 app = module.exports = express();
+
+app.use(cors());
 
 app.use(kraken(options));
 
