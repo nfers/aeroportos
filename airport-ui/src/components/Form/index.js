@@ -5,42 +5,23 @@ import Input from './Input';
 
 export default function Forms() {
   function handleSubmit(data) {
-    console.log(data);
-    // { email: 'test@example.com', password: '123456' }
+    console.log((data));
   }
-  return (
-    <Form onSubmit={handleSubmit}>
-      <p>
-      <label>Nome do Areoporto: </label>
-      <Input name="name" type="name" />
-      </p>
-      <p>
-      <label>Cidade do Areoporto: </label>      
-      <Input name="city" type="city" />
-      </p>
-      <button type="submit">gravar</button>
-    </Form>
+  return (   
+    <div className="form-group row">
+      <Form onSubmit={handleSubmit}>
+        <p>
+          <label>Quantidade de Areoportos: </label>
+          <Input name="qtdAeroportos" type="qtdAeroportos" />
+          <small id="qtdAeroportos" class="form-text text-muted">Informe um valor maior que 3.</small>
+        </p>
+        <p>
+          <label>Quantidade de Areoporto: </label>
+          <Input name="qtdNuvens" type="qtdNuvens" />
+          <small id="qtdNuvens" class="form-text text-muted">Informe um valor maior que 4.</small>
+        </p>
+        <button className="btn btn-dark" type="submit">Realizar Simulação</button>
+      </Form>
+    </div>
   )
-};
-
-
-
-
-
-
-
-
-// export default function Form() {
-//  async function handleSubmit(data) {
-//     console.log(data);
-//   }
-
-//   return (
-//     <Form onSubmit={handleSubmit}>
-//       <Input name="name" type="name" />
-//       <Input name="city" type="city" />
-
-//       <button type="submit">Gravar</button>
-//     </Form>
-//   );
-// }
+  };

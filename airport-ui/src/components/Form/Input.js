@@ -13,5 +13,5 @@ export default function Input({ name, ...rest }) {
     });
   }, [fieldName, registerField]);
 
-  return <input ref={inputRef} defaultValue={defaultValue} {...rest} />;
+  return <input ref={inputRef} defaultValue={defaultValue} {...rest} className="form-control" />;
 }
