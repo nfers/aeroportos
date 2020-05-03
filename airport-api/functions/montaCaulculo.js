@@ -1,6 +1,5 @@
 'use strict';
 
-
 const async = require('async');
 
 module.exports = async function montaCalculo (aeroporto) {
@@ -103,7 +102,6 @@ module.exports = async function montaCalculo (aeroporto) {
             for (const [x, eixoX] of eixoY.entries()) {
 
                 if (eixoX.isAeroporto && !eixoX.isNuvem) {
-                    console.log(matriz, eixoX, x, y, dia);
                     possuiAeroportoSemNuvens = true;
                 }
             }

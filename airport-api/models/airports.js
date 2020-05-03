@@ -12,7 +12,8 @@ const AirportSchema = new mongoose.Schema(
       type: String
     },
     country: {
-      type: String
+      type: String,
+      default: 'Brazil'
     }
   },
   {
