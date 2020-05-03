@@ -13,6 +13,7 @@
     "postinstall": "grunt postinstall"
   },
   "dependencies": {
+    "body-parser": "^1.19.0",
     "construx": "^1.0.0",
     "construx-copier": "^1.0.0",
     "cors": "^2.8.5",
