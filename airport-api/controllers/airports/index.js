@@ -1,5 +1,5 @@
 'use strict';
-//Rota de Aeroportos
+
 const Airport = require('../../models/airports');
 const async = require('async');
 const montaCalculo = require('../../functions/montaCaulculo');
@@ -15,26 +15,50 @@ module.exports = function (router) {
     router.post('/', async function (req, res) {
         const airports = await Airport.create(req.body)
 
-        return res.json({ success: true, data: airports});
+        try {
+            return res.json(
+                { success: true, data: airports }
+            );
+        } catch (error) {
+            res.status(400).send(
+                console.error(error)
+            );
+        }
     });
 
-    router.delete('/:id', async function (req, res) {
-        const { id } = await Airport.deleteOne(req.params)
+    router.delete('/', async function (req, res) {
 
-        return res.json({ sucess: `Aeroporto ${airports.name} deletado com sucesso!` });
+        const airport = await Airport.findByIdAndDelete({ _id: req.query.id });
+
+        try {
+            return res.json({ sucess: true, data: `Aeroporto ${req.query.id} deletado com sucesso!` })
+        } catch (error) {
+            res.status(400).send({ sucess: false, data: 'Ocorreu erro :' + error });
+        };
+
     });
 
     router.get('/simulacao', async function (req, res) {
+
         const aeroporto = {
-            qtdAeroportos: 3,
+            qtdAeroportos: parseInt(req.query.qtdAeroportos),
             largura: 10,
             altura: 10,
-            qtdNuvens: 4,
-        }
-        
+            qtdNuvens: parseInt(req.query.qtdNuvens),
+            simulacao: []
+        };
+
         const simular = await montaCalculo(aeroporto);
 
-        return res.json({ success: true, data: simular});
+        aeroporto.simulacao = simular;
+
+        const aero = await Airport.create(aeroporto);
+
+        try {
+            return res.json({ success: true, data: simular });
+        } catch (error) {
+            res.status(400).send({ sucess: false, data: error });
+        };
 
     })
 };

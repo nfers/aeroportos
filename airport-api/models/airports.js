@@ -4,21 +4,31 @@ const mongoose = require('mongoose');
 
 const AirportSchema = new mongoose.Schema(
   {
-    name: {
-      type: String,
+    qtdAeroportos: {
+      type: Number,
       required: true,
     },
-    city: {
-      type: String
+    largura: {
+      type: Number,
+      default: 10
     },
-    country: {
-      type: String,
-      default: 'Brazil'
+    altura: {
+      type: Number,
+      default: 10
+    },
+    qtdNuvens: {
+      type: Number,
+      default: 3
+    },
+    simulacao: {
+      type: Array, 
     }
   },
+  
   {
     timestamps : true
   }
 )
 
 module.exports = mongoose.model('Airport', AirportSchema);
+
