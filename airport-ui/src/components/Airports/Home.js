@@ -14,19 +14,26 @@ const AirportHome = () => {
   };
 
   return (
-
-    <div className="container-fluid">
-      <h1>Aeroportos em Operação</h1>
-      <form onSubmit={handleSubmit}>
-        <ul>
-          {airports.data.map((names, index) => (
-            <li key={index}>{names.name} </li>))}
-
-        </ul>
-        <button>Listar Aeroportos</button>
-      </form>
-      <button><Link to='/'>Voltar</Link></button>
-    </div>
+    <>
+      <div className="container">
+        <h1>Aeroportos em Operação</h1>
+      </div>
+      <div className="container">
+        <form onSubmit={handleSubmit}>
+          <div className="container-fluid">
+            <button className="btn btn-dark">Listar Aeroportos</button>
+            <button className="btn btn-dark"><Link to='/'>Voltar</Link></button>
+          </div>
+          <div className="list-group">
+            <ul className="list-group">
+              {airports.data.map((names, index) => (
+                <li className="list-group-item" key={index}>{names.name} </li>))}
+            </ul>
+          </div>
+        </form>
+        
+      </div>
+    </>
   )
 }
 
