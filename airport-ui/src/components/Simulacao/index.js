@@ -18,18 +18,18 @@ function Simulacao() {
 
 
   if (response && response.success) {
-
+    console.log(response.length)
     const grid = response.data.map((simulacao, simulacaoIndex) => {
 
       const rows = simulacao.matriz.map((eixoY, index) => {
         const tds = eixoY.map((eixoX, index) => {
           let campoType = '.';
           if (eixoX.isNuvem) {
-            campoType = <i className="medium material-icons">wb_cloudy
+            campoType = <i classNameName="medium material-icons">wb_cloudy
             </i>;
           }
           else if (eixoX.isAeroporto) {
-            campoType = <i className="medium material-icons">local_airport</i>;
+            campoType = <i classNameName="medium material-icons">local_airport</i>;
           }
 
           return (<td key={'td' + index}>{campoType}</td>)
@@ -40,13 +40,13 @@ function Simulacao() {
       })
 
       return (
-        <div key={'simulacao' + simulacaoIndex} className="row">
-          <div class="divider"></div>
-          <div class="section">
+        <div key={'simulacao' + simulacaoIndex} classNameName="row">
+          <div className="divider"></div>
+          <div className="section">
             <h5>dia: {simulacao.dia}</h5>
 
           </div>
-          <div class="col s1">
+          <div className="col s1">
             <Table responsive="lg"><thead>{rows}</thead></Table></div>
 
         </div>
@@ -58,7 +58,7 @@ function Simulacao() {
   else {
 
     return (<div>
-      <span classNameName="sr-only">Carregando...</span>
+      <span className="sr-only">Carregando...</span>
       <Spinner animation="border" role="status"></Spinner></div>)
   }
 }

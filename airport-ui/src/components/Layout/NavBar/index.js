@@ -4,10 +4,9 @@ import LinksNav from '../Links/index';
 
 const Navbar = () => {
   return (
-    <nav className="nav-wrapper grey darken-3">
-      <div className="container">
-        <LinksNav />
-      </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <LinksNav />
+      
     </nav>
   )
 }
