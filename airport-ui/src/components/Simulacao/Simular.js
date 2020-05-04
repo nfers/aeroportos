@@ -1,14 +1,14 @@
 import React from 'react';
 
+import '../../style.css'
+
 import Forms from '../Form/index';
 
 const Simular = () => {
   return (
-   <>
-    <div className="container-lg center">
-    <Forms />
+    <div className="teste">
+      <Forms />
     </div>
-  </>
   )
 }
 
