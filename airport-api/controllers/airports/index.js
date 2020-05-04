@@ -38,8 +38,7 @@ module.exports = function (router) {
 
     });
 
-    router.get('/simulacao', async function (req, res) {
-
+    router.get('/simulacao', async function (req, res) {        
         const aeroporto = {
             qtdAeroportos: parseInt(req.query.qtdAeroportos),
             largura: 10,
@@ -52,7 +51,7 @@ module.exports = function (router) {
 
         aeroporto.simulacao = simular;
 
-        const aero = await Airport.create(aeroporto);
+         const aero = await Airport.create(aeroporto);
 
         try {
             return res.json({ success: true, data: simular });

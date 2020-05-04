@@ -9,7 +9,7 @@ ReactDOM.render(
     <BrowserRouter>
       <Switch>
         <Route path="/*" exact component={App} />
-      </Switch>
+        </Switch>
     </ BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')

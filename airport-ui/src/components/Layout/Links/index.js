@@ -14,11 +14,6 @@ const LinksNav = () => {
             <span>Realizar Simulação</span>
           </NavLink>
         </li>
-        <li className="nav-item">
-          <NavLink className="nav-link" to='/airports'>
-            <span>Aeroportos</span>
-          </NavLink>
-        </li>
       </ul>
     </div>
   )
